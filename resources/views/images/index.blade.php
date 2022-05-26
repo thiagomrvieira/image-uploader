@@ -9,6 +9,10 @@
     <div class="max-w-lg mx-auto mt-24">
         <h1 class="text-4xl font-bold text-center">Image uploader</h1>
     </div>
-    
+
+    <div id="app">
+
+    </div>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
