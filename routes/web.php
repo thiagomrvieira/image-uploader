@@ -5,4 +5,4 @@ use App\Http\Controllers\ImageController;
 
 Route::get('/', [ImageController::class, 'index']);
 Route::get('/images', [ImageController::class, 'show']);
-Route::post('/', [ImageController::class, 'store']);
+Route::post('/images', [ImageController::class, 'store']);

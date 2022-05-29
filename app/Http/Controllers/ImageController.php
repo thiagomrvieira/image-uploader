@@ -18,6 +18,6 @@ class ImageController extends Controller
 
     public function store(Request $request)
     {
-        //  Save the image to the database
+        return $request->all();
     }
 }
