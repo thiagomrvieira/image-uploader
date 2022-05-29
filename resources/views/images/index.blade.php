@@ -4,6 +4,7 @@
     <title>Image uploading with Vue + Laravel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     <div class="max-w-lg mx-auto mt-24">
