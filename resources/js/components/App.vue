@@ -6,9 +6,10 @@
                 ref="pond"
                 lable-idle="Click to choose or drop image"
                 @init="filepondInitialized"
-                accepted-file-types="image/*"
+                accepted-file-types="image/jpg, image/jpeg, image/png"
                 allowMultiple="true"
                 @processfile="handleProcessedFile"
+                max-file-size="1MB"
             />
         </div>
         <div class="mt-8 mb-24">
@@ -24,29 +25,33 @@
 </template>
 
 <script>
-// Import Vue FilePond
 import vueFilePond, { setOptions } from "vue-filepond";
-
-// Import FilePond styles
 import "filepond/dist/filepond.min.css";
-
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
-
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import axios from "axios";
+
+let serverMessage = {};
 
 setOptions ({ 
     server: {
         process: {
             url: './images',
+            onerror: (response) =>{
+                serverMessage = JSON.parse(response);
+            },
             headers: {
                 'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
             }
         }
-    }
+    },
+    labelFileProcessingError: () => {
+        return serverMessage.error;
+    },
 });
 
 // Create component
-const FilePond = vueFilePond( FilePondPluginFileValidateType );
+const FilePond = vueFilePond( FilePondPluginFileValidateType, FilePondPluginFileValidateSize );
 
 export default {
     components: {
